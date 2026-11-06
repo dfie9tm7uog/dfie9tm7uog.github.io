@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>樱花动漫专注动漫的网站专注动漫的门户-在线动漫观看_新番更新_动漫分类导航</title>
+<meta name="description" content="樱花动漫专注动漫的网站专注动漫的门户，提供在线动漫观看入口、新番更新速览、动漫分类导航与追番收藏指引，一个页面看清本站的动漫内容组织与使用路径。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23f7c6d9'/%3E%3Cg fill='%23e8628c'%3E%3Cellipse cx='32' cy='20' rx='8' ry='10'/%3E%3Cellipse cx='32' cy='44' rx='8' ry='10'/%3E%3Cellipse cx='20' cy='32' rx='10' ry='8'/%3E%3Cellipse cx='44' cy='32' rx='10' ry='8'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='5' fill='%23fff5f8'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --pink:#e8628c;
+    --pink-soft:#f7c6d9;
+    --pink-pale:#fdf1f5;
+    --ink:#2f2530;
+    --ink-soft:#6a5b65;
+    --line:#f0dbe3;
+    --card:#ffffff;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#fff9fb 0%,#fdf3f7 55%,#fff 100%);
+    line-height:1.75;
+    font-size:16px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{width:min(1120px,92vw);margin:0 auto;}
+
+  /* ===== 页头 ===== */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,250,252,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .head-inner{
+    display:flex;align-items:center;gap:18px;
+    padding:12px 0;flex-wrap:wrap;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-weight:800;font-size:15px;line-height:1.35;
+    color:var(--ink);max-width:100%;
+  }
+  .logo svg{width:38px;height:38px;flex:none;}
+  .logo span{letter-spacing:.2px;}
+  nav.main{margin-left:auto;}
+  nav.main ul{
+    display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap;
+  }
+  nav.main a{
+    display:block;padding:7px 12px;border-radius:999px;
+    font-size:14px;color:var(--ink-soft);transition:.2s;
+  }
+  nav.main a:hover,nav.main a:focus-visible{
+    background:var(--pink-pale);color:var(--pink);outline:none;
+  }
+
+  /* ===== 首屏 ===== */
+  .hero{
+    padding:44px 0 34px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;right:-120px;top:-80px;
+    width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle at 40% 40%,#ffe3ee 0%,rgba(255,227,238,0) 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.35fr .9fr;gap:34px;align-items:center;
+    position:relative;
+  }
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--pink-pale);border:1px solid var(--line);
+    color:var(--pink);font-size:13px;font-weight:700;
+    padding:5px 14px;border-radius:999px;margin-bottom:16px;
+  }
+  h1{
+    font-size:clamp(24px,3.5vw,40px);
+    line-height:1.3;margin:0 0 16px;font-weight:900;
+    letter-spacing:.4px;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(180deg,transparent 66%,var(--pink-soft) 66%);
+    padding:0 2px;
+  }
+  .hero p.lead{
+    margin:0 0 22px;color:var(--ink-soft);font-size:15.5px;max-width:36em;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:999px;font-size:15px;font-weight:700;
+    border:1px solid transparent;transition:.2s;cursor:pointer;
+  }
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 8px 20px rgba(232,98,140,.28);}
+  .btn-primary:hover{background:#d94f7c;}
+  .btn-ghost{background:#fff;border-color:var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--pink-soft);color:var(--pink);}
+  .btn[aria-disabled="true"]{opacity:.55;pointer-events:none;cursor:default;box-shadow:none;}
+
+  .hero-art{
+    background:linear-gradient(160deg,#fff 0%,#fdeef4 100%);
+    border:1px solid var(--line);border-radius:26px;
+    padding:20px;display:flex;flex-direction:column;gap:12px;
+    box-shadow:0 18px 40px -28px rgba(232,98,140,.55);
+  }
+  .hero-art .art-title{
+    font-size:13px;font-weight:800;color:var(--pink);letter-spacing:1px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .hero-art .art-title span:last-child{
+    font-weight:500;color:var(--ink-soft);letter-spacing:0;
+  }
+  .art-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .art-strip i{
+    display:block;height:52px;border-radius:12px;
+    background:linear-gradient(135deg,#ffe1ec,#fbd0e0);
+  }
+  .art-strip i:nth-child(2){background:linear-gradient(135deg,#f9d7e6,#f3b8d0);}
+  .art-strip i:nth-child(3){background:linear-gradient(135deg,#fde7f0,#f7c6d9);}
+
+  /* ===== 通用区块 ===== */
+  section.block{padding:38px 0;border-top:1px solid var(--line);}
+  .block-head{margin-bottom:22px;}
+  .block-head h2{
+    font-size:clamp(19px,2.4vw,25px);margin:0 0 8px;font-weight:900;letter-spacing:.3px;
+  }
+  .block-head p{margin:0;color:var(--ink-soft);font-size:14.5px;max-width:44em;}
+  .sec-tag{
+    font-size:12px;font-weight:800;color:var(--pink);
+    letter-spacing:2px;display:block;margin-bottom:6px;
+  }
+
+  /* 更新速览列表 */
+  .update-list{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+    list-style:none;margin:0;padding:0;
+  }
+  .update-list li{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:14px 16px;display:flex;gap:14px;align-items:flex-start;
+    transition:.2s;
+  }
+  .update-list li:hover{border-color:var(--pink-soft);transform:translateY(-2px);}
+  .day{
+    flex:none;width:46px;height:46px;border-radius:12px;
+    background:var(--pink-pale);color:var(--pink);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:13px;
+  }
+  .update-list strong{display:block;font-size:15px;margin-bottom:2px;}
+  .update-list small{color:var(--ink-soft);font-size:13px;}
+
+  /* 分类卡片 */
+  .cats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .cat{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 18px;transition:.22s;
+  }
+  .cat:hover{border-color:var(--pink-soft);box-shadow:0 14px 28px -22px rgba(232,98,140,.7);}
+  .cat .ic{
+    width:40px;height:40px;border-radius:12px;background:var(--pink-pale);
+    display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+  }
+  .cat .ic svg{width:22px;height:22px;stroke:var(--pink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .cat h3{margin:0 0 6px;font-size:16px;font-weight:800;}
+  .cat p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.65;}
+
+  /* 筛选 */
+  .filter-bar{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .filter-bar label{font-size:13.5px;font-weight:700;color:var(--ink-soft);}
+  .filter-bar input{
+    flex:1 1 200px;min-width:0;padding:9px 14px;border-radius:999px;
+    border:1px solid var(--line);font-size:14px;font-family:inherit;
+    background:#fffafc;color:var(--ink);
+  }
+  .filter-bar input:focus{outline:2px solid var(--pink-soft);outline-offset:0;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{
+    border:1px solid var(--line);background:#fff;color:var(--ink-soft);
+    font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer;
+    font-family:inherit;transition:.18s;
+  }
+  .chip:hover{border-color:var(--pink-soft);color:var(--pink);}
+  .chip.active{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:700;}
+
+  .anime-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  }
+  .anime-card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:16px 18px;transition:.2s;
+  }
+  .anime-card:hover{border-color:var(--pink-soft);}
+  .anime-card .meta{
+    display:flex;gap:8px;align-items:center;font-size:12px;color:var(--pink);
+    font-weight:800;margin-bottom:8px;flex-wrap:wrap;
+  }
+  .anime-card .meta span.dot{width:4px;height:4px;border-radius:50%;background:var(--pink-soft);}
+  .anime-card h3{margin:0 0 6px;font-size:16px;font-weight:800;}
+  .anime-card p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.65;}
+  .empty{
+    grid-column:1/-1;text-align:center;padding:28px;color:var(--ink-soft);
+    font-size:14px;background:#fffafc;border:1px dashed var(--line);border-radius:16px;
+  }
+
+  /* 使用路径 */
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+    list-style:none;margin:0;padding:0;counter-reset:s;
+  }
+  .steps li{
+    counter-increment:s;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:20px 18px;position:relative;
+  }
+  .steps li::before{
+    content:"0" counter(s);
+    font-size:13px;font-weight:900;color:var(--pink);letter-spacing:1px;
+    display:block;margin-bottom:10px;
+  }
+  .steps h3{margin:0 0 6px;font-size:15.5px;font-weight:800;}
+  .steps p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.65;}
+
+  /* 说明正文 */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start;}
+  .about-grid h2{font-size:22px;margin:0 0 12px;font-weight:900;}
+  .about-grid p{margin:0 0 14px;font-size:15px;color:#4c3f47;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .note-box{
+    background:var(--pink-pale);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .note-box h3{margin:0 0 10px;font-size:15px;font-weight:800;color:var(--pink);}
+  .note-box ul{margin:0;padding-left:18px;font-size:13.8px;color:#5b4b54;line-height:1.85;}
+  .note-box li{margin-bottom:4px;}
+
+  /* 页尾 */
+  footer.site{
+    border-top:1px solid var(--line);background:#fffafc;padding:32px 0 28px;margin-top:10px;
+  }
+  .foot-top{
+    display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap;
+    padding-bottom:20px;border-bottom:1px dashed var(--line);
+  }
+  .foot-brand{max-width:34em;}
+  .foot-brand .logo{font-size:14px;margin-bottom:10px;}
+  .foot-brand p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.8;}
+  .foot-links{display:flex;gap:34px;flex-wrap:wrap;}
+  .foot-col h4{margin:0 0 10px;font-size:13px;font-weight:800;color:var(--ink);}
+  .foot-col ul{list-style:none;margin:0;padding:0;font-size:13px;line-height:2;}
+  .foot-col a{color:var(--ink-soft);}
+  .foot-col a:hover{color:var(--pink);}
+  .foot-bottom{
+    padding-top:16px;font-size:12.5px;color:#9a8a93;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{order:-1;}
+    .cats{grid-template-columns:repeat(2,1fr);}
+    .anime-grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .about-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    body{font-size:15px;}
+    .head-inner{padding:10px 0;gap:10px;}
+    .logo{font-size:13px;}
+    .logo svg{width:32px;height:32px;}
+    nav.main{width:100%;margin-left:0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    nav.main ul{flex-wrap:nowrap;gap:2px;padding-bottom:2px;}
+    nav.main a{white-space:nowrap;padding:6px 10px;font-size:13px;}
+    .hero{padding:28px 0 24px;}
+    .hero-art{padding:16px;}
+    .update-list{grid-template-columns:1fr;}
+    .anime-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .cats{grid-template-columns:1fr;}
+    section.block{padding:28px 0;}
+    .filter-bar{padding:12px;}
+    .foot-links{gap:22px;}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap head-inner">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#f7c6d9"/>
+        <g fill="#e8628c">
+          <ellipse cx="32" cy="20" rx="8" ry="10"/>
+          <ellipse cx="32" cy="44" rx="8" ry="10"/>
+          <ellipse cx="20" cy="32" rx="10" ry="8"/>
+          <ellipse cx="44" cy="32" rx="10" ry="8"/>
+        </g>
+        <circle cx="32" cy="32" r="5" fill="#fff5f8"/>
+      </svg>
+      <span>樱花动漫专注动漫的网站专注动漫的门户</span>
+    </a>
+    <nav class="main" aria-label="主导航">
+      <ul>
+        <li><a href="#updates">更新速览</a></li>
+        <li><a href="#genres">分类导航</a></li>
+        <li><a href="#list">动漫清单</a></li>
+        <li><a href="#howto">使用路径</a></li>
+        <li><a href="#about">关于本站</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">动漫内容门户 · 追番入口</span>
+        <h1>樱花动漫专注动漫的网站专注动漫的门户</h1>
+        <p class="lead">这是一个把动漫内容组织清楚的门户：按更新节奏看新番，按分类找题材，按清单确认要追的作品。樱花动漫专注动漫的网站专注动漫的门户把观看入口、分类导航和追番路径收在同一页，减少反复跳转。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#list">进入动漫清单</a>
+          <a class="btn btn-ghost" href="#genres">按分类找番</a>
+          <a class="btn btn-ghost" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+        </div>
+      </div>
+      <aside class="hero-art" aria-label="本周更新示意">
+        <div class="art-title"><span>本周更新示意</span><span>按星期排布</span></div>
+        <div class="art-strip"><i></i><i></i><i></i></div>
+        <div class="art-strip"><i></i><i></i><i></i></div>
+        <p style="margin:0;font-size:13px;color:var(--ink-soft);line-height:1.7;">更新以星期为轴，先看今天，再看本周，追番时不必逐条翻找。樱花动漫专注动漫的网站专注动漫的门户把更新节奏放在首屏。</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 更新速览 -->
+  <section class="block" id="updates">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="sec-tag">UPDATE</span>
+        <h2>更新速览：先看今天，再看本周</h2>
+        <p>更新速览按星期排列，每格注明更新方向与大致类型。习惯固定时间追番的读者，可以直接从当天一栏进入。</p>
+      </div>
+      <ul class="update-list">
+        <li>
+          <div class="day">周一</div>
+          <div><strong>热血与少年向更新</strong><small>适合从长篇连载起步，节奏偏快。</small></div>
+        </li>
+        <li>
+          <div class="day">周三</div>
+          <div><strong>日常与治愈向更新</strong><small>单元剧居多，随时可补。</small></div>
+        </li>
+        <li>
+          <div class="day">周五</div>
+          <div><strong>恋爱与校园向更新</strong><small>人气集中在晚间时段。</small></div>
+        </li>
+        <li>
+          <div class="day">周六</div>
+          <div><strong>新番集中更新</strong><small>季初新作多在这一天铺开。</small></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 分类导航 -->
+  <section class="block" id="genres">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="sec-tag">GENRE</span>
+        <h2>分类导航：按题材进入</h2>
+        <p>分类是动漫门户最常用的入口。樱花动漫专注动漫的网站专注动漫的门户按题材、篇幅与受众三条线索分类，先选方向，再看具体作品。</p>
+      </div>
+      <div class="cats">
+        <article class="cat">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6L21 9.6l-4.5 4.2 1.1 6.2L12 17l-5.6 3 1.1-6.2L3 9.6l6.4-1z"/></svg></div>
+          <h3>热血少年</h3>
+          <p>成长、战斗与团队线为主，适合连续观看，长篇作品多集中在此。</p>
+        </article>
+        <article class="cat">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.6-7 9-7 9z"/></svg></div>
+          <h3>恋爱校园</h3>
+          <p>以人物关系推进，单季完结比例高，适合按季成组补完。</p>
+        </article>
+        <article class="cat">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+          <h3>日常治愈</h3>
+          <p>单元结构、轻冲突，适合碎片时间，随时切入不影响理解。</p>
+        </article>
+        <article class="cat">
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div>
+          <h3>科幻奇幻</h3>
+          <p>世界观设定较厚，建议先读简介再入坑，避免中途卡在设定上。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 动漫清单 + 筛选 -->
+  <section class="block" id="list">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="sec-tag">LIST</span>
+        <h2>动漫清单：可筛选的作品索引</h2>
+        <p>清单按题材与篇幅标注，输入关键词或点选标签即可筛选。筛选在页面内即时生效，结果直接替换列表内容。</p>
+      </div>
+
+      <div class="filter-bar">
+        <label for="q">搜索</label>
+        <input id="q" type="search" placeholder="输入作品名或题材，如：治愈、校园、科幻" autocomplete="off">
+        <div class="chips" role="group" aria-label="题材筛选">
+          <button class="chip active" type="button" data-cat="all">全部</button>
+          <button class="chip" type="button" data-cat="热血">热血</button>
+          <button class="chip" type="button" data-cat="恋爱">恋爱</button>
+          <button class="chip" type="button" data-cat="日常">日常</button>
+          <button class="chip" type="button" data-cat="科幻">科幻</button>
+        </div>
+      </div>
+
+      <div class="anime-grid" id="grid">
+        <article class="anime-card" data-cat="热血" data-text="少年 长篇 战斗 连载">
+          <div class="meta"><span>热血</span><span class="dot"></span><span>长篇连载</span></div>
+          <h3>少年战斗线</h3>
+          <p>以队伍成长为主线，适合从第一集顺序观看，中途补番压力较小。</p>
+        </article>
+        <article class="anime-card" data-cat="恋爱" data-text="校园 恋爱 单季 完结">
+          <div class="meta"><span>恋爱</span><span class="dot"></span><span>单季完结</span></div>
+          <h3>校园关系线</h3>
+          <p>人物关系推动剧情，季末收束完整，适合按季成组补完。</p>
+        </article>
+        <article class="anime-card" data-cat="日常" data-text="治愈 日常 单元 轻松">
+          <div class="meta"><span>日常</span><span class="dot"></span><span>单元结构</span></div>
+          <h3>轻日常小品</h3>
+          <p>每集独立，不依赖前情，适合碎片时间随手看一集。</p>
+        </article>
+        <article class="anime-card" data-cat="科幻" data-text="科幻 奇幻 设定 世界观">
+          <div class="meta"><span>科幻</span><span class="dot"></span><span>设定向</span></div>
+          <h3>设定向世界观</h3>
+          <p>前期信息密度较高，建议先看简介与人物表，再进入正片。</p>
+        </article>
+        <article class="anime-card" data-cat="热血" data-text="热血 竞技 成长 少年">
+          <div class="meta"><span>热血</span><span class="dot"></span><span>成长线</span></div>
+          <h3>竞技成长线</h3>
+          <p>以阶段性目标推进，适合按篇章分段观看，节奏清晰。</p>
+        </article>
+        <article class="anime-card" data-cat="日常" data-text="治愈 生活 慢节奏 日常">
+          <div class="meta"><span>日常</span><span class="dot"></span><span>慢节奏</span></div>
+          <h3>慢节奏生活向</h3>
+          <p>情绪平稳，适合睡前或通勤时观看，不追求强情节。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用路径 -->
+  <section class="block" id="howto">
+    <div class="wrap">
+      <div class="block-head">
+        <span class="sec-tag">PATH</span>
+        <h2>使用路径：从找番到追番</h2>
+        <p>樱花动漫专注动漫的网站专注动漫的门户把访问动作归纳为四步，每条路径对应页面上一个可以点到的区域。</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>先看更新</h3>
+          <p>从更新速览确认今天是否有更新，避免空跑。</p>
+        </li>
+        <li>
+          <h3>再定题材</h3>
+          <p>用分类导航缩小范围，锁定一个方向。</p>
+        </li>
+        <li>
+          <h3>筛选清单</h3>
+          <p>在动漫清单里输入关键词或点标签，确认具体作品。</p>
+        </li>
+        <li>
+          <h3>记录追番</h3>
+          <p>把确定的作品记下来，按更新节奏回访，不必重复检索。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 关于本站 -->
+  <section class="block" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <h2>关于这个动漫门户</h2>
+        <p>樱花动漫专注动漫的网站专注动漫的门户定位为动漫内容的集中入口。页面不追求把所有作品铺满，而是把更新、分类、清单与使用路径四件事分开呈现，让读者按自己的习惯选择起点。</p>
+        <p>对习惯追新番的读者，更新速览是最短路径；对想按题材补番的读者，分类导航更直接；对已经有目标作品的读者，清单里的关键词筛选可以一步到位。三种入口并存，是因为访问动漫门户的人处在不同阶段。</p>
+        <p>本站只做内容组织与入口指引，不承诺片源与播放能力，也不代替作品本身的评价。作品信息以各条目简介为准，题材与篇幅标注用于辅助筛选，具体观看请以实际页面为准。</p>
+      </div>
+      <aside class="note-box">
+        <h3>使用提示</h3>
+        <ul>
+          <li>更新速览按星期排列，仅表示更新方向，不构成具体时间承诺。</li>
+          <li>分类标签可组合使用，先点题材再用关键词缩小范围。</li>
+          <li>清单内容由页面静态提供，筛选在本地完成，不发起请求。</li>
+          <li>下载入口尚未开放，按钮暂为禁用状态。</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="#f7c6d9"/>
+            <g fill="#e8628c">
+              <ellipse cx="32" cy="20" rx="8" ry="10"/>
+              <ellipse cx="32" cy="44" rx="8" ry="10"/>
+              <ellipse cx="20" cy="32" rx="10" ry="8"/>
+              <ellipse cx="44" cy="32" rx="10" ry="8"/>
+            </g>
+            <circle cx="32" cy="32" r="5" fill="#fff5f8"/>
+          </svg>
+          <span>樱花动漫专注动漫的网站专注动漫的门户</span>
+        </div>
+        <p>樱花动漫专注动漫的网站专注动漫的门户，以更新速览、分类导航、动漫清单和使用路径组织动漫内容，帮助读者更快找到想看的作品。</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>内容入口</h4>
+          <ul>
+            <li><a href="#updates">更新速览</a></li>
+            <li><a href="#genres">分类导航</a></li>
+            <li><a href="#list">动漫清单</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>使用说明</h4>
+          <ul>
+            <li><a href="#howto">使用路径</a></li>
+            <li><a href="#about">关于本站</a></li>
+            <li><a href="#top">回到顶部</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>樱花动漫专注动漫的网站专注动漫的门户 · 内容索引页</span>
+      <span>页面信息以实际展示为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.anime-card'));
+  var grid = document.getElementById('grid');
+  var activeCat = 'all';
+  var emptyEl = document.createElement('div');
+  emptyEl.className = 'empty';
+  emptyEl.textContent = '没有匹配的作品，换个关键词或切换题材试试。';
+
+  function apply(){
+    var kw = (q.value || '').trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(card){
+      var cat = card.getAttribute('data-cat') || '';
+      var text = (card.getAttribute('data-text') || '') + ' ' + card.textContent;
+      var catOK = activeCat === 'all' || cat === activeCat;
+      var kwOK = !kw || text.toLowerCase().indexOf(kw) !== -1;
+      var ok = catOK && kwOK;
+      card.style.display = ok ? '' : 'none';
+      if(ok) shown++;
+    });
+    if(shown === 0){
+      if(!emptyEl.parentNode) grid.appendChild(emptyEl);
+    }else if(emptyEl.parentNode){
+      emptyEl.parentNode.removeChild(emptyEl);
+    }
+  }
+
+  chips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      chips.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCat = btn.getAttribute('data-cat');
+      apply();
+    });
+  });
+
+  q.addEventListener('input', apply);
+  apply();
+})();
+</script>
+</body>
+</html>
